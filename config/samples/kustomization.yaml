@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- mind_v1alpha1_ask.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

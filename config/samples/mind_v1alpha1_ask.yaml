@@ -1,0 +1,9 @@
+apiVersion: mind.kubemind.io/v1alpha1
+kind: Ask
+metadata:
+  labels:
+    app.kubernetes.io/name: kubemind
+    app.kubernetes.io/managed-by: kustomize
+  name: ask-sample
+spec:
+  # TODO(user): Add fields here
