@@ -1,0 +1,8 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubemind-manager-role
+rules:
+  - apiGroups: ["mind.kubemind.io"]
+    resources: ["asks", "asks/status", "asks/finalizers"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
