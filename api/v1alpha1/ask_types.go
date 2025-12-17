@@ -25,17 +25,17 @@ import (
 
 // AskSpec defines the desired state of Ask.
 type AskSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// Question asked to KubeMind.
+	Question string `json:"question,omitempty"`
 
-	// Foo is an example field of Ask. Edit ask_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// ContextScope limits where knowledge is searched (future use).
+	ContextScope string `json:"contextScope,omitempty"`
 }
 
 // AskStatus defines the observed state of Ask.
 type AskStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	Answer     string `json:"answer,omitempty"`
+	AnsweredAt string `json:"answeredAt,omitempty"`
 }
 
 // +kubebuilder:object:root=true

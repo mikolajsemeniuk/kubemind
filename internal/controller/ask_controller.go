@@ -18,6 +18,7 @@ package controller
 
 import (
 	"context"
+	"time"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -47,9 +48,24 @@ type AskReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.21.0/pkg/reconcile
 func (r *AskReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = logf.FromContext(ctx)
+	log := logf.FromContext(ctx)
 
-	// TODO(user): your logic here
+	var ask mindv1alpha1.Ask
+	if err := r.Get(ctx, req.NamespacedName, &ask); err != nil {
+		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
+
+	log.Info("KubeMind Ask",
+		"name", ask.Name,
+		"question", ask.Spec.Question,
+	)
+
+	ask.Status.Answer = "POC: question received"
+	ask.Status.AnsweredAt = time.Now().Format(time.RFC3339)
+
+	if err := r.Status().Update(ctx, &ask); err != nil {
+		return ctrl.Result{}, err
+	}
 
 	return ctrl.Result{}, nil
 }
